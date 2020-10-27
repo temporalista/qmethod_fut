@@ -20,9 +20,9 @@ ipak(c("qmethod",
 source("my_qmb_plot.R")
 
 
-qstatements <- read_xlsx("datos/redu_fut_metodoq_public.xlsx", sheet = "1 Qset")
-qparticip <- read_xlsx("datos/redu_fut_metodoq_public.xlsx", sheet = "2 Qparticipantes")
-qsort <- as.data.frame(read_xlsx("datos/redu_fut_metodoq_public.xlsx", sheet = "3 Qsort"))
+qstatements <- read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "1 Qset")
+qparticip <- read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "2 Qparticipantes")
+qsort <- as.data.frame(read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "3 Qsort"))
 
 #Name rows and remove first column
 rownames(qsort) <- qsort[,1]
