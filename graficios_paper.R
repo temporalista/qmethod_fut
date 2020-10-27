@@ -10,8 +10,8 @@ ipak(c("qmethod",
 
 source("my_qmb_plot.R")
 
-load("outputs 20200310_bootstrap/qbstrp_results_ 3 f.RData")
-qstatements <- read_xlsx("redu_fut_metodoq 20200310.xlsx", sheet = "1 Qset")
+load("outputs//qbstrp_results_ 3 f.RData")
+qstatements <- read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "1 Qset")
 qmb.sum <- qmb.summary(qb3)
 
 qmb.sum$statements$sta_id<- rownames(qmb.sum$statements)
@@ -28,7 +28,7 @@ windowsFonts(serif=windowsFont("Adobe Garamond Pro"))
 
 
 #--- Figura 3 ----
-qsort <- as.data.frame(read_xlsx("redu_fut_metodoq 20200310.xlsx", sheet = "3 Qsort"))
+qsort <- as.data.frame(read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "3 Qsort"))
 
 #Name rows and remove first column
 rownames(qsort) <- qsort[,1]
@@ -57,7 +57,7 @@ plotf <- function(){
   }
 
 
-png(filename="graficos 2020 09/Figura 3 screeplot.png", 
+png(filename="outputs/Figura 3 screeplot.png", 
     type="cairo",
     units="cm", 
     bg = "white",
@@ -71,7 +71,7 @@ plotf()
 
 dev.off()
 
-cairo_pdf(filename="graficos 2020 09/Figura 3 screeplot.pdf", 
+cairo_pdf(filename="outputs/Figura 3 screeplot.pdf", 
     bg = "white",
     width=7.5, 
     height=6, 
@@ -109,7 +109,7 @@ plotq <- function(){my.qmb.plot(qmbsum=qmb.sum,
 }
 
 
-png(filename="graficos 2020 09/Figura 4 qmethod.png", 
+png(filename="outputs/Figura 4 qmethod.png", 
     type="cairo",
     units="px", 
     bg = "white",
@@ -119,8 +119,9 @@ png(filename="graficos 2020 09/Figura 4 qmethod.png",
     res=300,
     family="serif")
 plotq()
+dev.off()
 
-svg(filename="graficos 2020 09/Figura 4 qmethod.svg", 
+svg(filename="outputs/Figura 4 qmethod.svg", 
     bg = "white",
     width=6, 
     height=6, 
@@ -128,7 +129,7 @@ svg(filename="graficos 2020 09/Figura 4 qmethod.svg",
     family="serif")
 plotq()
 
-cairo_pdf(filename="graficos 2020 09/Figura 4 qmethod.pdf", 
+cairo_pdf(filename="outputs/Figura 4 qmethod.pdf", 
     bg = "white",
     width=6, 
     height=6, 
@@ -169,7 +170,7 @@ plotp <- function(){my.qmb.plot(qmbsum=qmb.sum,
 
 
 
-png(filename="graficos 2020 09/Figura 5 participantes.png", 
+png(filename="outputs/Figura 5 participantes.png", 
     type="cairo",
     units="px", 
     bg = "white",
@@ -183,7 +184,7 @@ plotp()
 dev.off()
 
 
-svg(filename="graficos 2020 09/Figura 5 participantes.svg", 
+svg(filename="outputs/Figura 5 participantes.svg", 
     bg = "white",
     width=6, 
     height=7.2, 
@@ -196,7 +197,7 @@ dev.off()
 
 
 
-cairo_pdf(filename="graficos 2020 09/Figura 5 participantes.pdf", 
+cairo_pdf(filename="outputs/Figura 5 participantes.pdf", 
     bg = "white",
     width=6, 
     height=7.2, 
