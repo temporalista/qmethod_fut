@@ -15,15 +15,14 @@ ipak(c("qmethod",
 ### Input data: statements, sorts and participants ----
 ###
 #update you working directory accordingly
-setwd("G:/My Drive/REDU FUT/FUT_seguimientoLlactalab/FUT_travelChoiceBehaviour/metodo q/redufut q method analysis")
 
 
 source("my_qmb_plot.R")
 
 
-qstatements <- read_xlsx("redu_fut_metodoq 20200310.xlsx", sheet = "1 Qset")
-qparticip <- read_xlsx("redu_fut_metodoq 20200310.xlsx", sheet = "2 Qparticipantes")
-qsort <- as.data.frame(read_xlsx("redu_fut_metodoq 20200310.xlsx", sheet = "3 Qsort"))
+qstatements <- read_xlsx("datos/redu_fut_metodoq_public.xlsx", sheet = "1 Qset")
+qparticip <- read_xlsx("datos/redu_fut_metodoq_public.xlsx", sheet = "2 Qparticipantes")
+qsort <- as.data.frame(read_xlsx("datos/redu_fut_metodoq_public.xlsx", sheet = "3 Qsort"))
 
 #Name rows and remove first column
 rownames(qsort) <- qsort[,1]
@@ -180,20 +179,20 @@ View(my.lof)
 # --------------
 # Bootstrapping ----
 #
-# qb3 <- qmboots(qsort, 
-#                nfactors = nf, 
-#                nsteps=2000,
-#                load = "auto",
-#                rotation = "varimax", 
-#                indet = "qindtest", 
-#                fsi = TRUE,
-#                forced = T,
-#                distribution = NULL,
-#                cor.method="pearson")
-# 
-# save(qb3, file = paste("outputs 20200310_bootstrap/qbstrp_results_",nf,"f.RData"))
-load("outputs 20200310_bootstrap/qbstrp_results_ 3 f.RData")
-qstatements <- read_xlsx("redu_fut_metodoq 20200310.xlsx", sheet = "1 Qset")
+qb3 <- qmboots(qsort,
+               nfactors = nf,
+               nsteps=2000,
+               load = "auto",
+               rotation = "varimax",
+               indet = "qindtest",
+               fsi = TRUE,
+               forced = T,
+               distribution = NULL,
+               cor.method="pearson")
+
+save(qb3, file = paste("outputs/qbstrp_results_",nf,"f.RData", sep = ""))
+load("outputs/qbstrp_results_ 3f.RData")
+qstatements <- read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "1 Qset")
 nfactors=3
 source("my_qmb_plot.R")
 
