@@ -106,6 +106,7 @@ my.qmb.plot <- function (qmbsum,
                          errbar.lwd = 0.5,
                          errbar.lty = "solid",
                          vertdist = 0.4,
+                         nchars=60,
                          limits = NULL,
                          leg.pos = "bottomleft",
                          sort = c("none", "difference","sd"), 
@@ -225,7 +226,7 @@ my.qmb.plot <- function (qmbsum,
   # }
   
   my.dotchart(db[, i], 
-           labels = stringr::str_trunc(rownames(db),60,side = "right"), #adjust the max number of characters
+           labels = stringr::str_trunc(rownames(db),nchars,side = "right"), #adjust the max number of characters
            adj=1,
            pch = NA, 
            xlim = limits, 
