@@ -1,3 +1,8 @@
+###
+### Intro ----
+###
+#This code is provided "as is" with no guarantees.
+#Daniel Orellana V. Universidad de Cuenca 2021
 
 ###
 ### Packs and environments ----
@@ -98,8 +103,9 @@ qresults2$f_char$characteristics
 
 
 #decide number of factors
-nf=3
+
 qresults <- qresults3
+nf=qresults$brief$nfactors
 
 ###plotting a diagram of z-scores for each statement
 par(lwd = 1.5, mar = c(4, 4, 1, 1) + 0.1)
@@ -118,15 +124,14 @@ plot(qresults,
      sort.items=T, 
      factors = NULL)
 
-abline(v=0, col='grey')
+abline(v=0, col='black')
 
 
 #### Merge and explore factor results ---- 
-my.qresults <- cbind(round(qresults$zsc, digits=2), qresults$zsc_n)
-nfactors <- ncol(qresults$zsc)
-# col.order <- as.vector(rbind(1:nfactors, (1:nfactors)+nfactors))
-# my.qresults <- my.qresults[col.order]
-my.qresults$sta_id<- rownames(my.qresults)
+my.qresults <- as.data.frame(cbind(
+  sta_id=rownames(qresults$zsc),
+  round(qresults$zsc, digits=2),
+  qresults$zsc_n))
 
 # merge original statements
 my.qresults <- merge(qstatements[,1:2],my.qresults, by="sta_id")
@@ -138,7 +143,7 @@ my.qresults <- my.qresults %>% rename(dist_cons=dist.and.cons)
 
 
 #View ordered results for each factor
-for (i in 1:nfactors) {
+for (i in 1:nf) {
   View(my.qresults[order(my.qresults[5+i], decreasing = TRUE), ],
        title = paste0("Order for f", i))
 }
@@ -193,7 +198,7 @@ qb3 <- qmboots(qsort,
 save(qb3, file = paste("outputs/qbstrp_results_",nf,"f.RData", sep = ""))
 load("outputs/qbstrp_results_ 3f.RData")
 qstatements <- read_xlsx("inputs/redu_fut_metodoq_public.xlsx", sheet = "1 Qset")
-nfactors=3
+nf=3
 source("my_qmb_plot.R")
 
 qmb.sum <- qmb.summary(qb3)
@@ -212,7 +217,7 @@ qmb_part$p_code <- rownames(qmb_part)
 
 my.qmb.plot(qmbsum=qmb.sum,
             type = "zsc",
-            nfactors=3,
+            nfactors=nf,
             cex = 0.6,
             cex.leg = 1,
             errbar.col = rgb(0.4,0.4,0.4),
